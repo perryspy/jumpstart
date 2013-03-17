@@ -7,7 +7,12 @@ function TestCtrl($scope) {
 }
 
 
-function LoginCtrl(){}
+function LoginCtrl($scope){}
 
 
-function RegisterCtrl(){}
+function RegisterCtrl($scope){
+    $scope.register = function(user){
+        console.log(user);
+    }
+
+}
