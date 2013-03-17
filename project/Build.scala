@@ -8,7 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    // Add your project dependencies here,
+    "org.mindrot" % "jbcrypt" % "0.3m",
     javaCore,
     javaJdbc,
     javaEbean

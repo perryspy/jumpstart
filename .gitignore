@@ -10,6 +10,10 @@ eclipse
 lib
 log
 logs
+project/project
+project/target
+target
+tmp
 modules
 precompiled
 .history
