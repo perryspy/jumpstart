@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['services']).
+angular.module('myApp', ['services', 'ngResource']).
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
 
