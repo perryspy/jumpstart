@@ -6,7 +6,7 @@
             <h1 class="text-uppercase">Register</h1>
 
             <ul ng-show="errors" class="unstyled alert alert-error">
-                <li ng-repeat="error in errors">{{error.message}}</li>
+                <li ng-repeat="error in errors">{{error}}</li>
             </ul>
 
             <p ng-show="global.connectedUser.authenticated">You're already logged in as user id #: {{global.connectedUser.id}}</p>

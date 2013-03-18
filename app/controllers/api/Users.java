@@ -24,7 +24,7 @@ public class Users extends ApiBaseController {
         userForm = userForm.bind(request().body().asJson());
 
         if(userForm.hasErrors()){
-            return ok("error"); //todo: propogate errors
+            return buildResult(userForm.errors());
         } else {
             userForm.get().save();
         }

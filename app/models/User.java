@@ -167,15 +167,17 @@ public class User extends Model {
     public List<ValidationError> validate(){
         List<ValidationError> errors = new ArrayList<ValidationError>();
         if(StringUtils.isNotEmpty(password) && StringUtils.isNotEmpty(confirmPassword) && !password.equals(confirmPassword)){
-            errors.add(new ValidationError("password", "passwordAndConfirmPasswordNoMatch"));
+            errors.add(new ValidationError("password", "error.passwordAndConfirmPasswordNoMatch"));
         }
 
         List<User> duplicates = User.find.where().ilike("username", this.username).findList();
         if(duplicates.size () > 1 || duplicates.size() == 1 && !duplicates.contains(this)){
-            errors.add(new ValidationError("username", "notUnique"));
+            errors.add(new ValidationError("username", "error.usernameNotUnique"));
         }
 
-        return errors;
+        //return null instead of empty list.
+        //see: http://stackoverflow.com/questions/11388269/playframework-illegalstateexception-after-form-validation
+        return errors.size() > 0 ? errors : null;
     }
 
 }

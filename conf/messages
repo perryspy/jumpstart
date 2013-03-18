@@ -1,0 +1,11 @@
+#Generic error messages
+error.required={0} is required
+
+#Custom Error Messages
+error.passwordAndConfirmPasswordNoMatch=The password and password confirmation do not match.
+error.usernameNotUnique=That username is already in use.  Please select another or login now.
+
+#mappings for error message keys
+confirmPassword=Confirm Password
+username=Username
+password=Password
