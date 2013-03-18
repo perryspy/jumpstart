@@ -21,8 +21,21 @@ import java.util.Map;
  * Date: 3/18/13
  * Time: 12:24 PM
  */
+
+/**
+ * Base class for API-type controllers
+ */
 public class ApiBaseController extends Controller {
 
+    /***********************************************************************
+     * Protected Utility Methods                                           *
+     ***********************************************************************/
+
+    /**
+     * Builds an ok (http 200) response with data and error fields constructed appropriately
+     * @param errorMap Map of Validation errors to put into the error data element if any exist
+     * @return Result
+     */
     protected static Result buildResult(Map<String, List<ValidationError>> errorMap){
 
         List<String> errorMessages = new ArrayList<String>();
@@ -42,7 +55,17 @@ public class ApiBaseController extends Controller {
     }
 
 
-    public static String errorMessage(ValidationError error) {
+    /***********************************************************************
+     * Private Utility Methods                                             *
+     ***********************************************************************/
+
+    /**
+     * Creates a message from a ValidationError this logic is "borrowed" from how Play v1.2.5 displays error messages
+     * since Play 2.1 ValidationErrors don't have the same display capabilities
+     * @param error ValidationError to generate message for
+     * @return String a display-able error message
+     */
+    private static String errorMessage(ValidationError error) {
         String printableKey = Messages.get(error.key());
         List<Object> args = new ArrayList<Object>();
         args.add(printableKey);

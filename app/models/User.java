@@ -3,11 +3,9 @@ package models;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.mindrot.jbcrypt.BCrypt;
-import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 import play.libs.Crypto;
-import play.libs.F;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -127,6 +125,12 @@ public class User extends Model {
         this.temporaryPasswordExpiration = null;
     }
 
+
+    /**
+     * Sets the user's password confirmation string to a hash of the plain text value.  Note that confirmPassword is a
+     * transient value and will not be stored in the database
+     * @param password
+     */
     public void setConfirmPassword(final String password){
         this.confirmPassword = hashPassword(password);
     }
@@ -155,7 +159,7 @@ public class User extends Model {
      * @param password The plain-text password to be hashed
      * @return a String that is the hashed value of the password.
      */
-    public String hashPassword(String password) {
+    private String hashPassword(String password) {
         return Crypto.encryptAES(BCrypt.hashpw(password, salt));
     }
 

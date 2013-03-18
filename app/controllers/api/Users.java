@@ -7,6 +7,7 @@ import play.data.Form;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 import play.mvc.Controller;
+import utils.SecurityUtil;
 
 import static play.data.Form.form;
 
@@ -26,10 +27,10 @@ public class Users extends ApiBaseController {
         if(userForm.hasErrors()){
             return buildResult(userForm.errors());
         } else {
-            userForm.get().save();
+            User user = userForm.get();
+            user.save();
+            SecurityUtil.createAuthenticatedSession(user);
+            return ok("success");
         }
-
-
-        return ok("success");
     }
 }
