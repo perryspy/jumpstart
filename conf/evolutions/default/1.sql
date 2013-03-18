@@ -5,6 +5,8 @@
 
 create table APP_USER (
   id                        bigint not null,
+  created                   timestamp,
+  updated                   timestamp,
   username                  varchar(255),
   password                  varchar(255),
   temporary_password        varchar(255),

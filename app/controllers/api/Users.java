@@ -25,12 +25,12 @@ public class Users extends ApiBaseController {
         userForm = userForm.bind(request().body().asJson());
 
         if(userForm.hasErrors()){
-            return buildResult(userForm.errors());
+            return errorResult(userForm.errors());
         } else {
             User user = userForm.get();
             user.save();
             SecurityUtil.createAuthenticatedSession(user);
-            return ok("success");
+            return successfulSaveResult(user);
         }
     }
 }

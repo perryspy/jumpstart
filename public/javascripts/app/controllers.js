@@ -3,19 +3,21 @@
 /* Controllers */
 
 var TestCtrl = ['$scope', function($scope) {
-    $scope.testVal = "testing the scope"
-}];
-
-
-var LoginCtrl = ['$scope', 'User', function($scope, User){
 
 }];
 
 
-var RegisterCtrl = ['$scope', '$location', 'User', function($scope, $location, User){
+var LoginCtrl = ['$scope', 'userService', function($scope, userService){
+
+}];
+
+
+var RegisterCtrl = ['$scope', '$location', 'userService', 'securityService', function($scope, $location, userService, securityService){
     $scope.register = function(formData){
-        var user = new User(formData);
-        user.$save(function(){
+        var user = new userService(formData);
+        user.$save(function(response){
+            console.log(response);
+            securityService.setConnectedUser(response.data.id);
             $location.path('/');
         });
 
@@ -26,4 +28,8 @@ var RegisterCtrl = ['$scope', '$location', 'User', function($scope, $location, U
         console.log(errors);
         $scope.errors = errors;
     })
+}];
+
+var LogoutCtrl = ['$scope', function($scope){
+
 }];

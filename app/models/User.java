@@ -22,7 +22,7 @@ import static play.data.validation.Constraints.Required;
  */
 @Entity
 @Table(name = "APP_USER")
-public class User extends Model {
+public class User extends ModelBase {
 
     /***********************************************************************
      * Enums and Static fields                                             *
@@ -36,12 +36,6 @@ public class User extends Model {
     /***********************************************************************
      * Class Member Variables                                              *
      ***********************************************************************/
-
-    /**
-     * Primary key for the User
-     */
-    @Id
-    public Long id;
 
     /**
      * The username that the user will use to log in to the system

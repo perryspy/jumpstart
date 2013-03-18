@@ -1,10 +1,12 @@
 package controllers.api;
 
+import models.ModelBase;
 import org.apache.http.protocol.ResponseServer;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
 import play.data.validation.ValidationError;
+import play.db.ebean.Model;
 import play.i18n.Messages;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -36,7 +38,7 @@ public class ApiBaseController extends Controller {
      * @param errorMap Map of Validation errors to put into the error data element if any exist
      * @return Result
      */
-    protected static Result buildResult(Map<String, List<ValidationError>> errorMap){
+    protected static Result errorResult(Map<String, List<ValidationError>> errorMap){
 
         List<String> errorMessages = new ArrayList<String>();
         Map<String, Object> result = new HashMap<String, Object>();
@@ -50,6 +52,15 @@ public class ApiBaseController extends Controller {
 
             result.put("error", errorMessages);
         }
+
+        return ok(Json.toJson(result));
+    }
+
+    protected static Result successfulSaveResult(ModelBase model){
+        Map <String, Object> result = new HashMap<String, Object>();
+        Map <String, Object> innerData = new HashMap<String, Object>();
+        innerData.put("id", model.id);
+        result.put("data", innerData);
 
         return ok(Json.toJson(result));
     }

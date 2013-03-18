@@ -2,11 +2,17 @@
 
 /* Services */
 
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('services', [])
-    .factory('User', function($resource){
-
+    .factory('userService', ['$resource', function($resource){
         return $resource("/api/users");
+    }])
+
+    .factory('securityService', function(){
+        var service = {};
+
+        service.setConnectedUser = function(id){
+            window.Conf.connectedUserId = id;
+        }
+
+        return service;
     });
