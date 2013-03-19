@@ -3,7 +3,16 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('myApp', ['services', 'ngResource']).
-    config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
+    run(['$rootScope', 'userService', function($rootScope, userService){
+        var connectedUserId = Conf.userInfo.id;
+        if(connectedUserId) {
+            var connectedUser = userService.get({id:connectedUserId}, function(response){
+                $rootScope.connectedUser = connectedUser;
+            });
+        }
+    }])
+
+    .config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
 
         $routeProvider.when('/', {templateUrl: 'assets/partials/test.html', controller: TestCtrl});

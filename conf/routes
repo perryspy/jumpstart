@@ -9,6 +9,7 @@ GET     /register                   controllers.Application.index()
 
 # API
 POST    /api/users                  controllers.api.Users.create()
+GET     /api/users/:id              controllers.api.Users.get(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -19,9 +19,12 @@
     <script src="@routes.Assets.at("javascripts/app/services.js")" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var Conf = window.Conf || {
-            @if(connectedUser != null){connectedUserId: @connectedUser.id}
-        };
+        var Conf = window.Conf ||
+            { userInfo:
+                {
+                    @if(connectedUser != null){id: @connectedUser.id}
+                }
+            };
     </script>
 </head>
 <body>

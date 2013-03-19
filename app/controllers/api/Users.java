@@ -4,6 +4,7 @@ package controllers.api;
 import models.User;
 import org.codehaus.jackson.JsonNode;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 import play.mvc.Controller;
@@ -32,5 +33,10 @@ public class Users extends ApiBaseController {
             SecurityUtil.createAuthenticatedSession(user);
             return successfulSaveResult(user);
         }
+    }
+
+
+    public static Result get(Long id){
+        return ok(Json.toJson(User.find.byId(id)));
     }
 }
