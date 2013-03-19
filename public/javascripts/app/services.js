@@ -7,12 +7,26 @@ angular.module('services', [])
         return $resource("/api/users/:id", {id:'@id'});
     }])
 
-    .factory('securityService', function(){
+    .factory('securityService', ['$resource', function($resource){
         var service = {};
+        var sessionsApi = $resource('api/sessions');
 
-        service.setConnectedUser = function(id){
-            Conf.userInfo.id = id;
+        service.setConnectedUser = function(id, callback){
+            window.Conf.userInfo.id = id;
+
+            if(callback){
+                callback();
+            }
+        }
+
+        service.clearConnectedUser = function (callback) {
+            sessionsApi.remove(function () {
+                window.Conf.userInfo = {};
+                if (callback) {
+                    callback();
+                }
+            });
         }
 
         return service;
-    });
+    }]);

@@ -4,21 +4,26 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', ['services', 'ngResource']).
     run(['$rootScope', 'userService', function($rootScope, userService){
-        var connectedUserId = Conf.userInfo.id;
-        if(connectedUserId) {
-            var connectedUser = userService.get({id:connectedUserId}, function(response){
-                $rootScope.connectedUser = connectedUser;
-            });
-        }
+
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            var connectedUserId = Conf.userInfo.id;
+            if(connectedUserId) {
+                var connectedUser = userService.get({id:connectedUserId}, function(response){
+                    $rootScope.connectedUser = connectedUser;
+                });
+            }
+        });
+
     }])
 
     .config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
 
-        $routeProvider.when('/', {templateUrl: 'assets/partials/test.html', controller: TestCtrl});
+        $routeProvider.when('/', {templateUrl: 'assets/partials/public.html', controller: TestCtrl});
+        $routeProvider.when('/home', {templateUrl: 'assets/partials/home.html', controller: TestCtrl});
         $routeProvider.when('/login', {templateUrl: 'assets/partials/login.html', controller: LoginCtrl});
         $routeProvider.when('/register', {templateUrl: 'assets/partials/register.html', controller: RegisterCtrl});
-        $routeProvider.otherwise({redirectTo: 'assets/partials/test.html'});
+        $routeProvider.otherwise({redirectTo: 'assets/partials/home.html'});
 
         $httpProvider.responseInterceptors.push('httpInterceptor');
     }])
