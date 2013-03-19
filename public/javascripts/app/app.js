@@ -3,16 +3,41 @@
 
 // Declare app level module which depends on filters, and services
 angular.module('myApp', ['services', 'ngResource']).
-    run(['$rootScope', 'userService', function($rootScope, userService){
+    run(['$rootScope', '$location', 'userService', function($rootScope, $location, userService){
 
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
             var connectedUserId = Conf.userInfo.id;
+
             if(connectedUserId) {
                 var connectedUser = userService.get({id:connectedUserId}, function(response){
                     $rootScope.connectedUser = connectedUser;
                 });
+
+                // If logged in user is trying to access index, redirect to dashboard
+                if (next.templateUrl === '/public/partials/public.html'){
+                    $location.url('/home');
+                }
+            } else {
+                // If user is trying to access a restricted page without being logged in
+                // except if index, login, or register, then redirect to login
+                if (!(next.templateUrl === '/public/partials/public.html'  ||
+                    next.templateUrl === '/public/partials/login.html' ||
+                    next.templateUrl === '/public/partials/register.html')) {
+                    $location.url('/login?req='+$location.path());
+                    $rootScope.authorizationErrors = [{message:'Please log in before accessing that page.'}];
+                }
+
+                // redirect index to login
+                if (next.templateUrl == '/public/partials/home.html'){
+                    $location.url('/login');
+                }
             }
+
         });
+
+
+
 
     }])
 
