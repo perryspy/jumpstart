@@ -1,5 +1,7 @@
 #Generic error messages
 error.required={0} is required
+error.minLength={0} must be at least {1} characters long
+error.maxLength={0} cannot be more than {1} characters long
 
 #Custom Error Messages
 
@@ -17,3 +19,4 @@ error.badPassword=Could not log in with that username and password
 confirmPassword=Confirm Password
 username=Username
 password=Password
+plainTextPassword=Password

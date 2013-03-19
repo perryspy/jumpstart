@@ -3,6 +3,7 @@ package models;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.mindrot.jbcrypt.BCrypt;
+import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
 import play.db.ebean.Model;
 import play.libs.Crypto;
@@ -48,6 +49,11 @@ public class User extends ModelBase {
      */
     @Required
     public String password;
+
+    @Transient
+    @Constraints.MinLength(6)
+    @Constraints.MaxLength(12)
+    public String plainTextPassword;
 
     /**
      * encrypted password value the can be compared against the password to check that the user entered the same value
@@ -140,6 +146,7 @@ public class User extends ModelBase {
      * @param password Plain text password value.
      */
     public void setPassword(final String password) {
+        this.plainTextPassword = password;
         this.password = hashPassword(password);
         //setting a new actual password clears out any temporary password data
         this.temporaryPassword = null;

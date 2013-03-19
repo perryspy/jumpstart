@@ -15,21 +15,21 @@ angular.module('myApp', ['services', 'ngResource']).
                 });
 
                 // If logged in user is trying to access index, redirect to dashboard
-                if (next.templateUrl === '/public/partials/public.html'){
+                if (next.templateUrl === 'assets/partials/public.html'){
                     $location.url('/home');
                 }
             } else {
                 // If user is trying to access a restricted page without being logged in
                 // except if index, login, or register, then redirect to login
-                if (!(next.templateUrl === '/public/partials/public.html'  ||
-                    next.templateUrl === '/public/partials/login.html' ||
-                    next.templateUrl === '/public/partials/register.html')) {
+                if (!(next.templateUrl === 'assets/partials/public.html'  ||
+                    next.templateUrl === 'assets/partials/login.html' ||
+                    next.templateUrl === 'assets/partials/register.html')) {
                     $location.url('/login?req='+$location.path());
                     $rootScope.authorizationErrors = [{message:'Please log in before accessing that page.'}];
                 }
 
                 // redirect index to login
-                if (next.templateUrl == '/public/partials/home.html'){
+                if (next.templateUrl == 'assets/partials/home.html'){
                     $location.url('/login');
                 }
             }
