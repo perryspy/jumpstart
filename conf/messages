@@ -2,8 +2,16 @@
 error.required={0} is required
 
 #Custom Error Messages
+
+#Registration custom errors
 error.passwordAndConfirmPasswordNoMatch=The password and password confirmation do not match.
 error.usernameNotUnique=That username is already in use.  Please select another or login now.
+
+#Login custom errors
+error.usernameAndPasswordRequired=Please enter a username and a password
+error.userNotFound=Could not log in with that username and password
+error.badPassword=Could not log in with that username and password
+
 
 #mappings for error message keys
 confirmPassword=Confirm Password

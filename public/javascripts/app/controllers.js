@@ -2,13 +2,23 @@
 
 /* Controllers */
 
-var TestCtrl = ['$scope', function($scope) {
 
-}];
+/**
+ * Controller for User Login.
+ */
+var LoginCtrl = ['$scope', 'securityService', '$location', function($scope, securityService, $location){
+    $scope.login = function(formData){
+        if(!formData){
+            formData = {};
+        }
+        securityService.login(formData.username, formData.password, function(){
+            $location.path('/home');
+        })
+    }
 
-
-var LoginCtrl = ['$scope', 'userService', function($scope, userService){
-
+    $scope.$on('appError', function(event, errors){
+        $scope.errors = errors;
+    })
 }];
 
 /**
@@ -20,7 +30,6 @@ var RegisterCtrl = ['$scope', '$location', 'userService', 'securityService', fun
         var user = new userService(formData);
         user.$save(function(response){
             securityService.setConnectedUser(response.data.id, function(){
-                console.log('executing callback');
                 $location.path('/home');
             });
 
@@ -29,8 +38,6 @@ var RegisterCtrl = ['$scope', '$location', 'userService', 'securityService', fun
     }
 
     $scope.$on('appError', function(event, errors){
-        console.log('appError detected: ' + event);
-        console.log(errors);
         $scope.errors = errors;
     })
 }];
@@ -51,3 +58,5 @@ var DefaultActionsCtrl = ['$scope', '$location', 'securityService', function($sc
 
     }
 }];
+
+

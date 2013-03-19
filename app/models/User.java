@@ -104,6 +104,33 @@ public class User extends ModelBase {
 
 
     /***********************************************************************
+     * Login Handlers                                                      *
+     ***********************************************************************/
+
+    public static User connect(String username, String password){
+        if(StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
+            throw new RuntimeException("error.usernameAndPasswordRequired");
+        }
+
+        User user = find.where().ieq("username", username).findUnique();
+
+        //no user found
+        if(user == null){
+            throw new RuntimeException("error.userNotFound");
+        }
+
+        //password does not match
+        if(!user.password.equals(user.hashPassword(password))) {
+            user.failedLoginAttempts++;
+            user.save();
+            throw new RuntimeException("error.badPassword");
+        }
+
+        return user;
+    }
+
+
+    /***********************************************************************
      * Methods for handling password values                                *
      ***********************************************************************/
 

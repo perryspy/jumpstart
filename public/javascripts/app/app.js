@@ -19,8 +19,8 @@ angular.module('myApp', ['services', 'ngResource']).
     .config(['$routeProvider', '$httpProvider', '$locationProvider', function($routeProvider, $httpProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
 
-        $routeProvider.when('/', {templateUrl: 'assets/partials/public.html', controller: TestCtrl});
-        $routeProvider.when('/home', {templateUrl: 'assets/partials/home.html', controller: TestCtrl});
+        $routeProvider.when('/', {templateUrl: 'assets/partials/public.html'});
+        $routeProvider.when('/home', {templateUrl: 'assets/partials/home.html'});
         $routeProvider.when('/login', {templateUrl: 'assets/partials/login.html', controller: LoginCtrl});
         $routeProvider.when('/register', {templateUrl: 'assets/partials/register.html', controller: RegisterCtrl});
         $routeProvider.otherwise({redirectTo: 'assets/partials/home.html'});

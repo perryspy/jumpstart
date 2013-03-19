@@ -28,5 +28,11 @@ angular.module('services', [])
             });
         }
 
+        service.login = function(username, password, callback){
+            sessionsApi.save({username: username, password: password}, function(response){
+                service.setConnectedUser(response.data.id, callback);
+            });
+        }
+
         return service;
     }]);
