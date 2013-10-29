@@ -12,7 +12,7 @@
             <p ng-show="global.connectedUser.authenticated">You're already logged in as user id #: {{global.connectedUser.id}}</p>
 
             <div ng-hide="global.connectedUser.authenticated">
-                <form class="loginForm">
+                <form name="loginForm">
                     <input placeholder="Email" type="text" ng-model="user.username" class="input-block-level" id="loginEmail">
                     <input placeholder="Password" type="password" ng-model="user.password" class="input-block-level" id="loginPassword">
                     <input placeholder="Confirm Password" type="password" ng-model="user.confirmPassword" class="input-block-level" id="registerConfirmPassword">

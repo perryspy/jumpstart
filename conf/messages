@@ -7,7 +7,7 @@ error.maxLength={0} cannot be more than {1} characters long
 
 #Registration custom errors
 error.passwordAndConfirmPasswordNoMatch=The password and password confirmation do not match.
-error.usernameNotUnique=That username is already in use.  Please select another or login now.
+error.usernameNotUnique=This email address has already been registered.  Please <a href="/login">log in.</a>
 
 #Login custom errors
 error.usernameAndPasswordRequired=Please enter a username and a password
