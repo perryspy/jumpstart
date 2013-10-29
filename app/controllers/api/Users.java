@@ -2,12 +2,10 @@ package controllers.api;
 
 
 import models.User;
-import org.codehaus.jackson.JsonNode;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
-import play.mvc.Controller;
 import utils.SecurityUtil;
 
 import static play.data.Form.form;

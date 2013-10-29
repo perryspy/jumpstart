@@ -5,10 +5,11 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints;
 import play.data.validation.ValidationError;
-import play.db.ebean.Model;
 import play.libs.Crypto;
 
 import javax.persistence.*;
+
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
